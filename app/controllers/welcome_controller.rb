@@ -13,7 +13,11 @@ class WelcomeController < ApplicationController
       @page = @agent.get("http://kik.com/u/#{params[:name]}")
 
       content = @page.content
-    
+      puts "----------------------------------" 
+      puts "----------------------------------" 
+      puts content.inspect
+      puts "----------------------------------" 
+      puts "----------------------------------" 
       if Nokogiri::HTML(content).text.gsub("\t","").gsub("\n","").match("USERNAME:#{params[:name]}")
         return true
       elsif Nokogiri::HTML(content).text.gsub("\t","").gsub("\n","").match("http\:\/\/kik.com\/profile\/notfound.php")
