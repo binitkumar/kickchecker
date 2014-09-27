@@ -10,10 +10,13 @@ class WelcomeController < ApplicationController
   def verify_name
     begin
       @agent = Mechanize.new
+      url = "http://kik.com/u/#{params[:name]}"
+       
       @page = @agent.get("http://kik.com/u/#{params[:name]}")
 
       content = @page.content
       puts "----------------------------------" 
+      puts url
       puts "----------------------------------" 
       puts content.inspect
       puts "----------------------------------" 
