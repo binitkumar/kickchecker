@@ -30,6 +30,8 @@ class WelcomeController < ApplicationController
     begin
       if name != ''
         @agent = Mechanize.new
+        @agent.user_agent = 'Linux Mozilla'
+
         url = "http://kik.com/u/#{name}"
         @page = @agent.get(url)
         content = @page.content
