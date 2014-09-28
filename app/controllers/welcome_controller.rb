@@ -5,7 +5,7 @@ class WelcomeController < ApplicationController
     prev_status = VerifiedName.find_by_username(username)
 
     if prev_status.nil?
-      status = loop_check(5, username)
+      status = loop_check(10, username)
 
       VerifiedName.create(username: username, status: status)
 
