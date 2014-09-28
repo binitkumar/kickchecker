@@ -2,9 +2,11 @@ class WelcomeController < ApplicationController
   def index
     username = params[:name]
 
-    if verify_name(username) == true
+    status = verify_name(username)
+
+    if status == true
       render json: {isValid: true}
-    elsif varify_name == "Invalid"
+    elsif status == "Invalid"
       render json: {notice: "Invalid paramter"}
     else
       render json: {isValid: false}
@@ -20,12 +22,6 @@ class WelcomeController < ApplicationController
         @page = @agent.get(url)
 
         content = @page.content
-        puts "----------------------------------" 
-        puts url
-        puts "----------------------------------" 
-        puts content.inspect
-        puts "----------------------------------" 
-        puts "----------------------------------" 
         if Nokogiri::HTML(content).text.gsub("\t","").gsub("\n","").match("USERNAME:#{params[:name]}")
           return true
         elsif Nokogiri::HTML(content).text.gsub("\t","").gsub("\n","").match("http\:\/\/kik.com\/profile\/notfound.php")
