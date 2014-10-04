@@ -45,8 +45,7 @@ class WelcomeController < ApplicationController
         elsif Nokogiri::HTML(content).text.gsub("\t","").gsub("\n","").match("http\:\/\/kik.com\/profile\/notfound.php")
           return false
         else
-          sleep 1
-          return verify_name
+          return "Invalid"
         end
       else
         return "Invalid"
