@@ -2,23 +2,27 @@ class WelcomeController < ApplicationController
   def index
     @agent = Mechanize.new
     @agent.user_agent = 'Linux Mozilla'
-    username = params[:name]
+    usernames = params[:name]
 
-    prev_status = VerifiedName.find_by_username(username)
+    verification_status = Array.new
+    usernames.split(",").each do |username|
+      prev_status = VerifiedName.find_by_username(username)
 
-    if prev_status.nil?
-      status = loop_check(10, username)
+      if prev_status.nil?
+        status = loop_check(10, username)
 
-      VerifiedName.create(username: username, status: status)
+        VerifiedName.create(username: username, status: status)
 
-      if status == true
-        render json: {isValid: true}
+        if status == true
+          verification_status.push(name:username,isValid: true)
+        else
+          verification_status.push(name:username,isValid: false)
+        end
       else
-        render json: {isValid: false}
+        verification_status.push(name:username,isValid: prev_status.status)
       end
-    else
-      render json: {isValid: prev_status.status}
     end
+    render json: verification_status
   end
   
   def loop_check(loop_count, username)
