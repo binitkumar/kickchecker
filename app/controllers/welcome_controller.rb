@@ -1,5 +1,7 @@
 class WelcomeController < ApplicationController
   def index
+    @agent = Mechanize.new
+    @agent.user_agent = 'Linux Mozilla'
     username = params[:name]
 
     prev_status = VerifiedName.find_by_username(username)
@@ -29,8 +31,6 @@ class WelcomeController < ApplicationController
   def verify_name(name)
     begin
       if name != ''
-        @agent = Mechanize.new
-        @agent.user_agent = 'Linux Mozilla'
 
         url = "http://kik.com/u/#{name}"
         @page = @agent.get(url)
