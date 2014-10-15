@@ -11,18 +11,29 @@ class WelcomeController < ApplicationController
       prev_status = VerifiedName.find_by_username(username)
       i += 1
       if prev_status.nil?
-        thread = Thread.new(i) do |i|
-          status_hash = get_hash(username)
-          verification_status.push status_hash
-        end
-        threads.push thread
-
+        status_hash = get_hash(username)
+        verification_status.push status_hash
       else
         verification_status.push(name:username,isValid: prev_status.status)
       end
     end
-    threads.each {|t| t.join}        
     render json: verification_status
+  end
+
+  def update_status
+    entry = VerifiedName.find_by_username(params['kik-username'.to_sym])
+    if params[:isValid] == 'INVALID'
+      entry.update_attribute(:status, false) if entry
+    else
+      entry.update_attribute(:status, true) if entry
+    end
+    redirect_to action: :update_entry
+  end
+
+  def delete_entry
+    entry = VerifiedName.find_by_username(params['kik-username'.to_sym])
+    entry.destroy if entry
+    redirect_to action: :update_entry
   end
   
   def get_hash(username)

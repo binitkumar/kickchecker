@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>KIK Name API Admin Form</title>
+  <link rel="stylesheet" href="/assets/style.css">
+  <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body>
+  <div class="main-cont" style="display:inline-block; margin: auto; width: 100%;
+text-align: center;">
+    <div class="left-form" style="display:inline-block; margin: auto; margin-right:20px;">
+  <h1 class="register-title">Modify Username</h1>
+  <form class="register" action='/welcome/update_status'>
+    <div class="register-switch">
+      <input type="radio" name="isValid" value="VALID" id="valid_f" class="register-switch-input" checked>
+      <label for="valid_f" class="register-switch-label">Valid</label>
+      <input type="radio" name="isValid" value="INVALID" id="invalid_f" class="register-switch-input">
+      <label for="invalid_f" class="register-switch-label">Invalid</label>
+    </div>
+    <input type="text" name="kik-username" class="register-input" placeholder="KIK Username">
+    
+    <input type="submit" value="Modify" class="register-button">
+  </form>
+    </div>
+    <div class="right-form" style="display:inline-block;">
+    <h1 class="register-title">Delete Username</h1>
+  <form class="register" onsubmit="return confirm('Confirm name deletion?');" action="/welcome/delete_entry">
+    
+    <input type="text" name="kik-username" class="register-input" placeholder="KIK Username">
+   
+    <input type="submit" value="Delete" class="delete-button">
+  </form>
+    </div>
+  </div>
+</body>
+</html>
+
