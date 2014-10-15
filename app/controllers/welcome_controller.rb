@@ -10,7 +10,7 @@ class WelcomeController < ApplicationController
     usernames.split(",").each do |username|
       prev_status = VerifiedName.find_by_username(username)
       i += 1
-      if prev_status.nil?
+      if prev_status.nil? || prev_status.status == false
         status_hash = get_hash(username)
         verification_status.push status_hash
       else
