@@ -41,8 +41,9 @@ class WelcomeController < ApplicationController
   
   def get_hash(username)
     status = loop_check(10, username)
-
-    VerifiedName.create(username: username, status: status)
+    
+    entry = VerifiedName.first_or_create(username: username)
+    entry.update_attribute(:status, status)
 
     if status == true
       return {name:username,isValid: true}
