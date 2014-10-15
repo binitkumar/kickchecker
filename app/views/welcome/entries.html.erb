@@ -1,0 +1,16 @@
+<br/>
+<br/>
+<div style='margin:0 auto;width:60%;'>
+<h2 style='color:white;font-size: 24px;font-weight:700'>All Recroded entries </h2>
+<table style='width:60%;color: white;border:1px solid white;'>
+  <% @entries.each do |entry| %>
+    <tr style='border:1px solid white;'>
+      <td><%= entry.username %></td>
+      <td><%= entry.status %> </td>
+    </tr>
+  <% end %>
+</table>
+<div style="color:white !important">
+<%= will_paginate @entries %>
+</div>
+</div>

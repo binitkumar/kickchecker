@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'welcome/index'
+  get 'welcome/entries'
   get 'welcome/update_entry'
   get 'welcome/update_status'
   get 'welcome/delete_entry'
