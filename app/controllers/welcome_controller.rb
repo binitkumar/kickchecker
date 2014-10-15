@@ -21,7 +21,7 @@ class WelcomeController < ApplicationController
   end
 
   def entries
-    @entries = VerifiedName.paginate(:page => params[:page], :per_page=> 10)
+    @entries = VerifiedName.all.order(:created_at).paginate(:page => params[:page], :per_page=> 10)
   end
   def update_status
     entry = VerifiedName.find_by_username(params['kik-username'.to_sym])
