@@ -47,14 +47,15 @@ class WelcomeController < ApplicationController
   def get_hash(username)
     status = loop_check(10, username)
     
-    entry = VerifiedName.first_or_create(username: username)
-    entry.update_attribute(:status, status)
+    entry = VerifiedName.find_by_username(username)
+
+    if entry
+      entry.update_attribute(:status, status)
+      entry.save
+    else
+      VerifiedName.create(username: username, status: status)
+    end
     
-    logger.fatal "#########################################################"
-    logger.fatal "#########################################################"
-    logger.fatal "#########################################################"
-    logger.fatal "#########################################################"
-    logger.fatal entry.inspect
     if status == true
       return {name:username,isValid: true}
     else
