@@ -9,6 +9,11 @@ class WelcomeController < ApplicationController
     i = 0
     usernames.split(",").each do |username|
       prev_status = VerifiedName.find_by_username(username)
+      puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+      puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+      puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+      puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+      puts prev_status.inspect
       i += 1
       if prev_status.nil? || prev_status.status == false
         status_hash = get_hash(username)
@@ -44,7 +49,12 @@ class WelcomeController < ApplicationController
     
     entry = VerifiedName.first_or_create(username: username)
     entry.update_attribute(:status, status)
-
+    
+    puts "#########################################################"
+    puts "#########################################################"
+    puts "#########################################################"
+    puts "#########################################################"
+    puts entry.inspect
     if status == true
       return {name:username,isValid: true}
     else
